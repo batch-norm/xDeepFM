@@ -28,10 +28,8 @@ class FeatureDictionary(object):
             dfTest = self.dfTest
         df = pd.concat([dfTrain, dfTest])
         self.feat_dict = {}
-        # tc 应该是特征个数的标识
         tc = 0
         for col in df.columns:
-            # 如果是ignore的特征或者numeric特征，那么是不需要处理的，直接当做一个特征
             if col in self.ignore_cols:
                 continue
             if col in self.numeric_cols:
@@ -39,7 +37,6 @@ class FeatureDictionary(object):
                 self.feat_dict[col] = tc
                 tc += 1
             else:
-                # us是该类别特征的unique的长度，也就是one-hot之后有多少个特征
                 us = df[col].unique()
                 self.feat_dict[col] = dict(zip(us, range(tc, len(us)+tc)))
                 tc += len(us)
@@ -49,7 +46,6 @@ class FeatureDictionary(object):
 
 class DataParser(object):
     def __init__(self, feat_dict):
-        # 这里是传进一个类来
         self.feat_dict = feat_dict
 
     def parse(self, infile=None, df=None, has_label=False):
@@ -59,12 +55,9 @@ class DataParser(object):
             dfi = df.copy()
         else:
             dfi = pd.read_csv(infile)
-
-        # 这里默认是要把target和id去除
         if has_label:
             y = dfi[Config.label_name].values.tolist()
             dfi.drop([Config.label_name], axis=1, inplace=True)
-        # 没有label返回index
         else:
             ids = dfi["id"].values.tolist()
             dfi.drop(["id"], axis=1, inplace=True)
@@ -80,9 +73,7 @@ class DataParser(object):
             if col in self.feat_dict.numeric_cols:
                 dfi[col] = self.feat_dict.feat_dict[col]
             else:
-                # 因为这里传进来的类的名字还叫feat_dict......所以是feat_dict.feet_dict
                 dfi[col] = dfi[col].map(self.feat_dict.feat_dict[col])
-                # 因为是one-hot,如果是这一类就是1
                 dfv[col] = 1.
 
         # list of list of feature indices of each sample in the dataset
