@@ -25,8 +25,9 @@ Recurrent improve Deep-FM , Deep-FM 改进版 , 本文主要基于陈成龙的De
 
 ## 模型架构
 
-大体的架构
-<img src="pic/structure.png" width="620" alt="none" align="center">
+**大体的架构:**
+
+<img src="pic/structure.png" width="820" alt="none" align="center">
 
 
 
@@ -34,6 +35,6 @@ Recurrent improve Deep-FM , Deep-FM 改进版 , 本文主要基于陈成龙的De
 
 **1.GD mini-batch RI-GD 实验**
 
-<img src="pic/valid_f1.png" width="620" alt="none" align="center">
+<img src="pic/valid_f1.png" width="480" alt="none" align="center">
 
 
