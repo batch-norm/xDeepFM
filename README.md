@@ -33,5 +33,6 @@ TODO
 
 **1.GD mini-batch RI-GD 实验**
 
-![](valid_f1.png)
+<img src="valid_f1.png" width="620" alt="none" align="center">
+
 
