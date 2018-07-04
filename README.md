@@ -31,5 +31,7 @@ TODO
 
 ## 实践
 
-TODO
+**1.GD mini-batch RI-GD 实验**
+
+![](valid_f1.png)
 
