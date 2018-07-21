@@ -42,7 +42,7 @@
 + 默认使用 DNN + CIN + FM，可在Config中配置
 + 默认建立vocabulary的最低词频 10
 
-**3.模型试验**
+**3.模型实验**
 
 **- Batch_size : 4096 , epochs: 2000**
 
