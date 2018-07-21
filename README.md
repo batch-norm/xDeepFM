@@ -3,15 +3,16 @@
 ## 介绍
 
 **- 原论文题目：《xDeepFM: Combining Explicit and Implicit Feature Interactions for Recommender Systems》**
+
 **- 原论文地址： [xDeepFM](https://arxiv.org/pdf/1803.05170.pdf.)**
 
-**- 论文整理: []()**
+**- 论文整理: [论文整理](https://github.com/batch-norm/xDeepFM/tree/master/paper)**
 
 下面对本论文提出的模型进行了复现。
 
 ## 模型介绍
 
-**- 模型架构 = FM + CIN + DNN **
+**模型架构 = FM + CIN + DNN**
 
 <img src="img/pic2.png" width="480" alt="none" align="center">
 
@@ -55,5 +56,7 @@
 
 + **优点**：表达能力更强，可以发掘出vector-wise的交互特征，精度更高
 + **缺点**：训练速度变得很缓慢
+
+yyq 2018年07月21日13:47:42
 
 
