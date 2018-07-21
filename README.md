@@ -1,40 +1,59 @@
-# RI-DeepFM
-Recurrent improve Deep-FM , Deep-FM 改进版 , 本文主要基于陈成龙的DeepFM模型做为基础添加部分修改(原DeepFM地址)：
+# xDeepFM
 
-[chenglong chen's github: https://github.com/ChenglongChen/tensorflow-DeepFM](https://github.com/ChenglongChen/tensorflow-DeepFM)
+## 介绍
 
+**- 原论文题目：《xDeepFM: Combining Explicit and Implicit Feature Interactions for Recommender Systems》**
+**- 原论文地址： [xDeepFM](https://arxiv.org/pdf/1803.05170.pdf.)**
 
+**- 论文整理: []()**
 
+下面对本论文提出的模型进行了复现。
 
+## 模型介绍
 
-## **主要改动:**
+**- 模型架构 = FM + CIN + DNN **
 
-- [x] 新增**分段循环训练**，每段训练可以**自定义损失函数，learning_rate,batch_size,epochs**,所有段训练完成为一个recurrent,可以训练多个recurrent。
+<img src="img/pic2.png" width="480" alt="none" align="center">
 
-- [ ] **可以处理多值离散特征**，例如下表中的'爱好'特征。
+## 使用
 
-  | 爱好               | 年龄 | 性别 |
-  | :----------------- | :--- | :--- |
-  | 玩游戏\|踢球\|游泳 | 20   | 1    |
-  | 玩游戏             | 18   | 0    |
-  | 跑步\|踢球         | 34   | 1    |
+**1.数据准备**
 
-- [ ] **可以自动处理缺失值**
++ 训练集和测试集需为.csv文件
++ 支持**数值型特征映射为embedding**,也支持**数值型特征直接作为DNN输入**
++ 支持**多值离散特征**的处理,可自行配置为sum or mean,分隔符请用"|"
++ **cat特征**需要自行先用labelEncoder转换一下
 
+具体配置在**Config.py**文件中，也可结合ex_data中的例子作为参考。
 
+**转换完成后的训练数据示例:**
 
-## 模型架构
+```
+1,18:1,30:1,0:0.25,2:0.8125,4:0.0,6:0.0,8:0.0,10:0.006630292147247738,12:0.8125,14:0.25,16:0.5625,
+```
 
-**大体的架构:**
+**2.模型训练**
 
-<img src="pic/structure.png" width="820" alt="none" align="center">
++ 先在Config中指定单值离散，多值离散，连续型特征
++ 默认激活函数"relu",默认optimizer"Adagrad"
++ 默认DNN网络结构 [128,64,32]
++ 默认CIN卷积核维度 [10,10,10] ,输出维度 [1]
++ 默认使用 DNN + CIN + FM，可在Config中配置
++ 默认建立vocabulary的最低词频 10
 
+**3.模型试验**
 
+**- Batch_size : 4096 , epochs: 2000**
 
-## 实践
+**- 指标为"logloss"**  
 
-**1.GD mini-batch RI-GD 实验**
+<img src="img/pic1.png" width="480" alt="none" align="center">
 
-<img src="pic/valid_f1.png" width="480" alt="none" align="center">
+## 小结
+
+模型基于DeepFM加入了**CIN component (压缩交互网络)**，对原有的结构进行了vector-wise和边界明确的交互填充
+
++ **优点**：表达能力更强，可以发掘出vector-wise的交互特征，精度更高
++ **缺点**：训练速度变得很缓慢
 
 
