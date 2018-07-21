@@ -48,6 +48,8 @@
 
 **- 指标为"logloss"**  
 
+**- 数据为 “2018中国高校大数据挑战赛” 初赛数据**
+
 <img src="img/pic1.png" width="480" alt="none" align="center">
 
 ## 小结
